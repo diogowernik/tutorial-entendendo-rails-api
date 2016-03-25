@@ -11,7 +11,6 @@
 on line 37, delete:
 
 ```ruby
-t.string :name
 t.string :nickname
 t.string :image
 ```
@@ -62,7 +61,10 @@ before_action :authenticate_user!, except: [:show, :index]
 
 ```ruby
 def user_params
-params.require(:user).permit(:email)
+  params.require(:user).permit(
+    :name,
+    :email
+  )
 end
 ```
 

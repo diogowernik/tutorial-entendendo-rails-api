@@ -22,15 +22,16 @@ Edit gem file, installing gems for the api:
     gem 'omniauth'
 
     group :development, :test do
-      gem 'rspec-rails', '~> 3.0'
-      gem 'rubocop', '~> 0.37.2', require: false
+      gem 'rspec-rails'
+      gem 'rubocop', require: false
     end
 ```
 
-On teminal
+On terminal
 
     bundle install
     rake db:migrate
+
 
 Insert .rubocop.yml in the project root
 
