@@ -68,13 +68,13 @@ And change for:
 ```ruby
   def card_params
     params.require(:card).permit(
-      nickname:string
-      phone:string
-      email:string 
-      is_solidarity:boolean
-      is_published:boolean
-      subdomain:string    
-      domain:string
+      :nickname
+      :phone
+      :email
+      :is_solidarity
+      :is_published
+      :subdomain   
+      :domain
     )
   end
 ```
