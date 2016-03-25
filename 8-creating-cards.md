@@ -9,14 +9,14 @@ nickname:string
 phone:string
 email:string 
 is_solidarity:boolean
-is_published;.boolean
+is_published:boolean
 subdomain:string    
 domain:string
 ```
 
 **terminal**
 
-    rails generate model card nickname:string phone:string email:string is_solidarity:boolean is_published;.boolean subdomain:string domain:string
+    rails generate model card nickname:string phone:string email:string is_solidarity:boolean is_published:boolean subdomain:string domain:string
 
     rails g scaffold_controller Card
 
