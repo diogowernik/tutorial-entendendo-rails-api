@@ -1,8 +1,8 @@
-## 5 - Creating Profiles
+## 8 - Creating Cards
 
-### Generate model and controller for profile
+### Generate model and controller for card
 
-For profile this are the fields created for the moment:
+For card this are the fields created for the moment:
 
 ```ruby
 nickname:string
@@ -20,9 +20,9 @@ domain:string
 
     rails g scaffold_controller Card
 
-set relation user and profile (in db)
+set relation user and card (in db)
 
-**db/migrate/____create_profiles**
+**db/migrate/____create_cards**
 
 ```ruby
 t.belongs_to :user, index: true
@@ -32,7 +32,7 @@ set relation user and profile and valitations (in models), can be has_one or has
 **app/models/user.rb**
 
 ```ruby
-has_many :profile
+has_many :card
 ```
 
 **app/models/card.rb**
@@ -49,7 +49,7 @@ validates :user, presence: true
 **config/routes.rb**  
 
 ```ruby
-resources :profiles
+resources :cards
 ```
 
 **app/controllers/card_controller.rb**
@@ -58,15 +58,15 @@ find:
 
 ```ruby
   def profile_params
-    params[:profile]
+    params[:card]
   end
 ```
 
 And change for:
 
 ```ruby
-  def profile_params
-    params.require(:profile).permit(
+  def card_params
+    params.require(:card).permit(
       nickname:string
       phone:string
       email:string 
@@ -78,7 +78,7 @@ And change for:
   end
 ```
 
-**spec/controllers/profile_controller_spec.rb**
+**spec/controllers/card_controller_spec.rb**
 
 delete because is for rails full application, not needed for only rails-api:
 
