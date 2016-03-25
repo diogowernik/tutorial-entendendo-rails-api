@@ -42,9 +42,10 @@ belongs_to :user
 ```
 
 ```ruby
-validates :name, presence: true
-validates :description, presence: true
-validates :user, presence: true
+  validates :nickname, presence: true
+  validates :domain, presence: true
+  validates :subdomain, presence: true
+  validates :user, presence: true
 ```
 **config/routes.rb**  
 
@@ -71,7 +72,7 @@ And change for:
       phone:string
       email:string 
       is_solidarity:boolean
-      is_published;.boolean
+      is_published:boolean
       subdomain:string    
       domain:string
     )
