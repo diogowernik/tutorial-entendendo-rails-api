@@ -7,13 +7,16 @@ For publication this are the fields created for the moment:
 ```ruby
 title:string
 description:text
-type:string
+image:string
 is_published:boolean
+subdomain:string
+domain:string
+tags:string
 ```
 
 **terminal**
 
-    rails generate model publication title:string description:text type:string is_published:boolean
+    rails generate model publication title:string description:text image:string is_published:boolean subdomain:string domain:string tags:string
 
     rails g scaffold_controller Publication
 
@@ -23,6 +26,7 @@ set relation profile and publications (in db)
 
 ```ruby
 t.belongs_to :profile, index: true
+t.belongs_to :user, index: true
 ```
 set relation publication and profile and valitations (in models), can be has_one or has_many
 
@@ -32,17 +36,22 @@ set relation publication and profile and valitations (in models), can be has_one
 has_many :publication
 ```
 
+**app/models/user.rb**
+
+```ruby
+has_many :publication
+```
+
 **app/models/publication.rb**
 
 ```ruby
-belongs_to :profile
-```
-
-```ruby
-validates :title, presence: true
-validates :description, presence: true
-validates :type, presence: true
-validates :profile, presence: true
+  belongs_to :user
+  belongs_to :card
+  has_many :publication
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :user, presence: true
+  validates :card, presence: true
 ```
 **config/routes.rb**  
 
@@ -69,7 +78,13 @@ And change for:
       :title,
       :description,
       :type,
-      :profile_id
+      :image,
+      :is_published,
+      :subdomain,
+      :domain,
+      :tags,
+      :profile_id,
+      :user_id
     )
   end
 ```
@@ -110,3 +125,9 @@ db install:
 Run rspec to check the app
 
     rspec
+    rubocop
+
+    git checkout -b feature/publications_controller
+    git add -A .
+    git commit -m "publications created"
+    git push origin feature/publications_controller

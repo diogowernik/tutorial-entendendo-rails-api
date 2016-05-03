@@ -5,18 +5,20 @@
 For card this are the fields created for the moment:
 
 ```ruby
-nickname:string
+name:string
+image:string
 phone:string
 email:string 
+subdomain:string
+domain:string
+tags:string
 is_solidarity:boolean
 is_published:boolean
-subdomain:string    
-domain:string
 ```
 
 **terminal**
 
-    rails generate model card nickname:string phone:string email:string is_solidarity:boolean is_published:boolean subdomain:string domain:string
+    rails generate model card name:string image:string phone:string email:string subdomain:string domain:string tags:string is_solidarity:boolean is_published:boolean
 
     rails g scaffold_controller Card
 
@@ -38,11 +40,8 @@ has_many :card
 **app/models/card.rb**
 
 ```ruby
-belongs_to :user
-```
-
-```ruby
-  validates :nickname, presence: true
+  belongs_to :user
+  validates :name, presence: true
   validates :domain, presence: true
   validates :subdomain, presence: true
   validates :user, presence: true
@@ -68,13 +67,14 @@ And change for:
 ```ruby
   def card_params
     params.require(:card).permit(
-      :nickname
-      :phone
-      :email
-      :is_solidarity
+      :name.
+      :phone,
+      :email,
+      :subdomain,
+      :domain,
+      :tags,
+      :is_solidarity,
       :is_published
-      :subdomain   
-      :domain
     )
   end
 ```
@@ -112,3 +112,9 @@ db install:
 Run rspec to check the app
 
     rspec
+
+Git new branch:
+
+    git checkout -b feature/cards_controller
+    git add -A .
+    git commit -m "card created"

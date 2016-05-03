@@ -6,13 +6,22 @@ For profile this are the fields created for the moment:
 
 ```ruby
 name:string
+image:string
 description:text
-is_published:boolean
+site_url:string
+blog_url:string
+phone:string
+mobile_phone:string
+google_plus:string 
+facebook_page:string
+instagram:string 
+twitter:string
+tags:string
 ```
 
 **terminal**
 
-    rails generate model profile name:string description:text is_published:boolean
+    rails generate model profile name:string image:string description:text site_url:string blog_url:string phone:string mobile_phone:string google_plus:string facebook_page:string instagram:string twitter:string tags:string
 
     rails g scaffold_controller Profile
 
@@ -22,6 +31,7 @@ set relation user and profile (in db)
 
 ```ruby
 t.belongs_to :user, index: true
+t.belongs_to :card, index: true
 ```
 set relation user and profile and valitations (in models), can be has_one or has_many
 
@@ -31,16 +41,21 @@ set relation user and profile and valitations (in models), can be has_one or has
 has_many :profile
 ```
 
+**app/models/card.rb**
+
+```ruby
+has_one :profile
+```
+
 **app/models/profile.rb**
 
 ```ruby
 belongs_to :user
-```
-
-```ruby
+belongs_to :card
 validates :name, presence: true
 validates :description, presence: true
 validates :user, presence: true
+validates :card, presence: true
 ```
 **config/routes.rb**  
 
@@ -53,8 +68,23 @@ resources :profiles
 find:
 
 ```ruby
-  def profile_params
-    params[:profile]
+def profile_params
+    params.require(:profile).permit(
+      :name,
+      :image,
+      :description,
+      :site_url,
+      :blog_url,
+      :phone,
+      :mobile_phone,
+      :google_plus, 
+      :facebook_page,
+      :instagram,
+      :twitter,
+      :tags,
+      :user_id,
+      :card_id
+    )
   end
 ```
 
@@ -103,3 +133,10 @@ db install:
 Run rspec to check the app
 
     rspec
+    rubocop
+
+git on all
+
+    git checkout -b feature/profiles_controller
+    git add -A .
+    git commit -m "profiles created"

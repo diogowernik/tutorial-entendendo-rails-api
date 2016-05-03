@@ -8,13 +8,6 @@
 
 **db/migrate/___create_users.db**
 
-on line 37, delete:
-
-```ruby
-t.string :nickname
-t.string :image
-```
-
 Install the migrate generated
 
     rake db:migrate
