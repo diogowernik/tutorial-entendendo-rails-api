@@ -6,22 +6,13 @@ For profile this are the fields created for the moment:
 
 ```ruby
 name:string
-image:string
+avatar:string
 description:text
-site_url:string
-blog_url:string
-phone:string
-mobile_phone:string
-google_plus:string 
-facebook_page:string
-instagram:string 
-twitter:string
-tags:string
 ```
 
 **terminal**
 
-    rails generate model profile name:string image:string description:text site_url:string blog_url:string phone:string mobile_phone:string google_plus:string facebook_page:string instagram:string twitter:string tags:string
+    rails generate model profile name:string avatar:string description:text
 
     rails g scaffold_controller Profile
 
@@ -38,7 +29,7 @@ set relation user and profile and valitations (in models), can be has_one or has
 **app/models/user.rb**
 
 ```ruby
-has_many :profile
+has_many :profiles
 ```
 
 **app/models/card.rb**
@@ -68,23 +59,8 @@ resources :profiles
 find:
 
 ```ruby
-def profile_params
-    params.require(:profile).permit(
-      :name,
-      :image,
-      :description,
-      :site_url,
-      :blog_url,
-      :phone,
-      :mobile_phone,
-      :google_plus, 
-      :facebook_page,
-      :instagram,
-      :twitter,
-      :tags,
-      :user_id,
-      :card_id
-    )
+  def profile_params
+
   end
 ```
 
@@ -95,6 +71,7 @@ And change for:
     params.require(:profile).permit(
       :name,
       :description,
+      :avatar,
       :user_id
     )
   end
